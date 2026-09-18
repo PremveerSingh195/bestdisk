@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- Required by Electron's V8 for the hardened runtime -->
+	<key>com.apple.security.cs.allow-jit</key>
+	<true/>
+	<key>com.apple.security.cs.allow-unsigned-executable-memory</key>
+	<true/>
+	<key>com.apple.security.cs.disable-library-validation</key>
+	<true/>
+
+	<!-- Lets the "Open Folder…" picker hand us read/write access to the choice -->
+	<key>com.apple.security.files.user-selected.read-write</key>
+	<true/>
+
+	<!--
+		Note: Full Disk Access is NOT an entitlement. It is a TCC permission the
+		user grants manually in System Settings → Privacy & Security → Full Disk
+		Access. The app detects the missing permission at runtime (see
+		electron/modules/permissions.ts) and points the user at that pane.
+	-->
+</dict>
+</plist>

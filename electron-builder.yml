@@ -1,0 +1,32 @@
+appId: com.yourname.diskanalyzer
+productName: DiskLens
+copyright: Copyright © 2024
+
+directories:
+  output: release
+  buildResources: build
+
+files:
+  - out/**/*
+  - package.json
+
+mac:
+  category: public.app-category.utilities
+  target:
+    - target: dmg
+      arch:
+        - x64
+        - arm64
+  entitlements: build/entitlements.mac.plist
+  entitlementsInherit: build/entitlements.mac.plist
+  hardenedRuntime: true
+  gatekeeperAssess: false
+  extendInfo:
+    NSDesktopFolderUsageDescription: DiskLens needs access to scan folders and analyze disk usage.
+    NSDocumentsFolderUsageDescription: DiskLens needs access to analyze your Documents folder.
+    NSDownloadsFolderUsageDescription: DiskLens needs access to analyze your Downloads folder.
+    NSRemovableVolumesUsageDescription: DiskLens needs access to scan external volumes.
+    LSMinimumSystemVersion: '11.0'
+
+dmg:
+  artifactName: ${productName}-${version}-${arch}.${ext}

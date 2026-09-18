@@ -1,0 +1,188 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ------------------------------------------------------------------ tokens */
+
+:root {
+  color-scheme: dark;
+
+  /* macOS-inspired palette */
+  --bg-primary: rgba(28, 28, 30, 0.85);
+  --bg-secondary: rgba(44, 44, 46, 0.7);
+  --bg-glass: rgba(255, 255, 255, 0.06);
+  --bg-hover: rgba(255, 255, 255, 0.08);
+  --bg-canvas: #131315;
+  --border: rgba(255, 255, 255, 0.1);
+  --text-primary: #f2f2f7;
+  --text-secondary: rgba(235, 235, 245, 0.6);
+  --text-tertiary: rgba(235, 235, 245, 0.3);
+
+  --accent-blue: #0a84ff;
+  --accent-green: #30d158;
+  --accent-orange: #ff9f0a;
+  --accent-red: #ff453a;
+  --accent-purple: #bf5af2;
+  --accent-yellow: #ffd60a;
+  --accent-teal: #64d2ff;
+
+  /* Size colour scale, used across every chart */
+  --color-tiny: #30d158; /* < 1MB      */
+  --color-small: #0a84ff; /* 1MB–100MB  */
+  --color-medium: #ff9f0a; /* 100MB–1GB  */
+  --color-large: #ff6b35; /* 1GB–10GB   */
+  --color-huge: #ff453a; /* > 10GB     */
+
+  --traffic-light-space: 76px;
+  --titlebar-height: 28px;
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+
+  --bg-primary: rgba(246, 246, 248, 0.85);
+  --bg-secondary: rgba(255, 255, 255, 0.72);
+  --bg-glass: rgba(0, 0, 0, 0.04);
+  --bg-hover: rgba(0, 0, 0, 0.06);
+  --bg-canvas: #f4f4f6;
+  --border: rgba(0, 0, 0, 0.1);
+  --text-primary: #1c1c1e;
+  --text-secondary: rgba(60, 60, 67, 0.65);
+  --text-tertiary: rgba(60, 60, 67, 0.35);
+
+  --accent-blue: #007aff;
+  --accent-green: #34c759;
+  --accent-orange: #ff9500;
+  --accent-red: #ff3b30;
+  --accent-purple: #af52de;
+  --accent-yellow: #ffcc00;
+  --accent-teal: #32ade6;
+}
+
+/* Follow the system when the user has not picked a theme explicitly. */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme='dark']):not([data-theme='light']) {
+    color-scheme: light;
+
+    --bg-primary: rgba(246, 246, 248, 0.85);
+    --bg-secondary: rgba(255, 255, 255, 0.72);
+    --bg-glass: rgba(0, 0, 0, 0.04);
+    --bg-hover: rgba(0, 0, 0, 0.06);
+    --bg-canvas: #f4f4f6;
+    --border: rgba(0, 0, 0, 0.1);
+    --text-primary: #1c1c1e;
+    --text-secondary: rgba(60, 60, 67, 0.65);
+    --text-tertiary: rgba(60, 60, 67, 0.35);
+
+    --accent-blue: #007aff;
+    --accent-green: #34c759;
+    --accent-orange: #ff9500;
+    --accent-red: #ff3b30;
+    --accent-purple: #af52de;
+    --accent-yellow: #ffcc00;
+    --accent-teal: #32ade6;
+  }
+}
+
+/* -------------------------------------------------------------------- base */
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+  }
+
+  body {
+    background: transparent;
+    color: var(--text-primary);
+    font-family:
+      -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', Inter, sans-serif;
+    font-size: 13px;
+    line-height: 18px;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* No text selection anywhere except where it is useful. */
+  * {
+    user-select: none;
+  }
+
+  input,
+  textarea,
+  [data-selectable] {
+    user-select: text;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--text-tertiary);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--text-secondary);
+  }
+
+  button {
+    font: inherit;
+    color: inherit;
+  }
+}
+
+/* --------------------------------------------------------------- utilities */
+
+@layer utilities {
+  /* Drag handle for the frameless window. */
+  .drag-region {
+    -webkit-app-region: drag;
+  }
+
+  .no-drag {
+    -webkit-app-region: no-drag;
+  }
+
+  .glass {
+    background: var(--bg-glass);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+  }
+
+  .mac-ease {
+    transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .focus-ring {
+    outline: 2px solid var(--accent-blue);
+    outline-offset: 2px;
+  }
+}
+
+/* D3 chart interactions — brightness lift rather than a shadow. */
+.chart-segment {
+  transition:
+    filter 150ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    opacity 150ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.chart-segment:hover,
+.chart-segment.is-hovered {
+  filter: brightness(1.15);
+}
+
+.chart-label {
+  pointer-events: none;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', Inter, sans-serif;
+}
