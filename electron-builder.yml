@@ -1,5 +1,5 @@
 appId: com.yourname.diskanalyzer
-productName: DiskLens
+productName: Bestdisk
 copyright: Copyright © 2024
 
 directories:
@@ -22,10 +22,10 @@ mac:
   hardenedRuntime: true
   gatekeeperAssess: false
   extendInfo:
-    NSDesktopFolderUsageDescription: DiskLens needs access to scan folders and analyze disk usage.
-    NSDocumentsFolderUsageDescription: DiskLens needs access to analyze your Documents folder.
-    NSDownloadsFolderUsageDescription: DiskLens needs access to analyze your Downloads folder.
-    NSRemovableVolumesUsageDescription: DiskLens needs access to scan external volumes.
+    NSDesktopFolderUsageDescription: Bestdisk needs access to scan folders and analyze disk usage.
+    NSDocumentsFolderUsageDescription: Bestdisk needs access to analyze your Documents folder.
+    NSDownloadsFolderUsageDescription: Bestdisk needs access to analyze your Downloads folder.
+    NSRemovableVolumesUsageDescription: Bestdisk needs access to scan external volumes.
     LSMinimumSystemVersion: '11.0'
 
 dmg:

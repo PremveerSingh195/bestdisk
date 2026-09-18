@@ -11,7 +11,7 @@ import type {
 } from '@shared/types'
 import { findPathTrail, removePaths, resolveStack } from '@renderer/utils/tree'
 
-const HISTORY_KEY = 'disklens.scanHistory'
+const HISTORY_KEY = 'Bestdisk.scanHistory'
 const MAX_HISTORY = 5
 
 function readHistory(): string[] {

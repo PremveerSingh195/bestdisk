@@ -22,7 +22,7 @@ function createWindow(): void {
     minWidth: 900,
     minHeight: 600,
     show: false,
-    title: 'DiskLens',
+    title: 'Bestdisk',
     // Transparent background so the vibrancy material shows through.
     backgroundColor: '#00000000',
     titleBarStyle: 'hiddenInset',

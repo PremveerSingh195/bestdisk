@@ -26,7 +26,7 @@ export class ErrorBoundary extends Component<Props, State> {
   }
 
   override componentDidCatch(error: Error, info: ErrorInfo): void {
-    console.error(`[DiskLens] ${this.props.label} crashed`, error, info.componentStack)
+    console.error(`[Bestdisk] ${this.props.label} crashed`, error, info.componentStack)
   }
 
   private readonly reset = (): void => {

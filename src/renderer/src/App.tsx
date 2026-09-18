@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { CheckCircle2, Info, X } from 'lucide-react'
 import type { DiskNode } from '@shared/types'
-import { ConfirmProvider } from './components/Dialogs'
+import { ConfirmProvider, useConfirm } from './components/Dialogs'
 import { AppUninstaller } from './components/AppUninstaller'
 import { CleanupDrawer } from './components/CleanupDrawer'
 import { ContextMenu } from './components/ContextMenu'
@@ -44,7 +44,7 @@ function TitleBar(): JSX.Element {
   return (
     <header className="drag-region flex h-[38px] shrink-0 items-center justify-center border-b border-[var(--border)] bg-[var(--bg-glass)] backdrop-blur-2xl">
       <span className="text-label font-semibold tracking-wide text-[var(--text-secondary)]">
-        DiskLens
+        Bestdisk
       </span>
     </header>
   )
@@ -162,15 +162,37 @@ function AppShell(): JSX.Element {
     }
   }, [applyComplete, applyError, applyProgress, handleScanComplete, loadDisks, refreshPermissions])
 
-  // ------------------------------------------------------------ actions
+  const confirm = useConfirm()
+
+  const handleStartScan = useCallback(
+    async (path: string) => {
+      const permissions = useScanStore.getState().permissions
+      if (permissions && permissions.fullDiskAccess === false) {
+        const ok = await confirm({
+          title: 'Full Disk Access Recommended',
+          message:
+            'To scan your disk without macOS asking for permission for every folder individually, please grant Full Disk Access. Would you like to open System Settings now?',
+          confirmLabel: 'Open Settings',
+          cancelLabel: 'Scan Anyway'
+        })
+        if (ok) {
+          void window.diskAPI.openFullDiskAccessSettings()
+          return
+        }
+      }
+      startScan(path)
+    },
+    [confirm, startScan]
+  )
+
   const openFolder = useCallback(async (): Promise<void> => {
     const chosen = await window.diskAPI.openFolder()
-    if (chosen) startScan(chosen)
-  }, [startScan])
+    if (chosen) void handleStartScan(chosen)
+  }, [handleStartScan])
 
   const scanBootVolume = useCallback((): void => {
-    startScan(disk?.mountPoint ?? '/')
-  }, [disk, startScan])
+    void handleStartScan(disk?.mountPoint ?? '/')
+  }, [disk, handleStartScan])
 
   const selected = useSelectionStore((state) => state.selected)
   const hovered = useUiStore((state) => state.hovered)
@@ -205,7 +227,8 @@ function AppShell(): JSX.Element {
 
       if (isMeta && !event.shiftKey && event.key.toLowerCase() === 'r') {
         event.preventDefault()
-        rescan()
+        const currentPath = useScanStore.getState().scanPath
+        if (currentPath) void handleStartScan(currentPath)
         return
       }
 

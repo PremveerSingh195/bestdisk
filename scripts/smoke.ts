@@ -126,7 +126,7 @@ function testSkipGuards(): void {
 async function testScanner(): Promise<void> {
   console.log('\nscanner')
 
-  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'disklens-smoke-'))
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'Bestdisk-smoke-'))
   await buildFixture(root)
 
   try {
@@ -193,7 +193,7 @@ async function testScanner(): Promise<void> {
       const aliasTree = await scanDirectory({
         root: aliasedRoot,
         signal: new AbortController().signal,
-        onProgress: () => {}
+        onProgress: () => { }
       })
       check('a symlinked root scans its target', aliasTree.size >= 6000, String(aliasTree.size))
       check(
@@ -205,7 +205,7 @@ async function testScanner(): Promise<void> {
         findByPath(aliasTree, path.join(aliasedRoot, 'gateway')) === null
       )
     } finally {
-      await fs.unlink(aliasedRoot).catch(() => {})
+      await fs.unlink(aliasedRoot).catch(() => { })
     }
 
     // Cancellation
@@ -213,7 +213,7 @@ async function testScanner(): Promise<void> {
     aborted.abort()
     let cancelled: unknown = null
     try {
-      await scanDirectory({ root, signal: aborted.signal, onProgress: () => {} })
+      await scanDirectory({ root, signal: aborted.signal, onProgress: () => { } })
     } catch (err) {
       cancelled = err
     }
@@ -225,7 +225,7 @@ async function testScanner(): Promise<void> {
       await scanDirectory({
         root: path.join(root, 'nope'),
         signal: new AbortController().signal,
-        onProgress: () => {}
+        onProgress: () => { }
       })
     } catch (err) {
       missing = err
@@ -237,7 +237,7 @@ async function testScanner(): Promise<void> {
       await scanDirectory({
         root: path.join(root, 'a.txt'),
         signal: new AbortController().signal,
-        onProgress: () => {}
+        onProgress: () => { }
       })
     } catch (err) {
       notADir = err
@@ -312,7 +312,7 @@ async function testDfParsing(): Promise<void> {
 async function testDuplicates(): Promise<void> {
   console.log('\nduplicate finder')
 
-  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'disklens-dupes-'))
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'Bestdisk-dupes-'))
 
   try {
     const identical = Buffer.alloc(128 * 1024, 'x')

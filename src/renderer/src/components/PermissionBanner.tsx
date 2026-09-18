@@ -21,7 +21,7 @@ export function PermissionBanner(): JSX.Element | null {
         <p className="text-body font-medium">Grant Full Disk Access for a complete scan</p>
         <p className="text-label text-[var(--text-secondary)]">
           macOS is hiding some folders
-          {permissions.probedPath ? ` (starting with ${permissions.probedPath})` : ''}. DiskLens will
+          {permissions.probedPath ? ` (starting with ${permissions.probedPath})` : ''}. Bestdisk will
           still scan what it can reach.
         </p>
       </div>

@@ -230,7 +230,7 @@ export async function scanDirectory(options: ScannerOptions): Promise<DiskNode> 
   } catch (err: unknown) {
     if ((err as NodeJS.ErrnoException).code === 'EPERM') {
       throw new Error(
-        `macOS denied access to ${root}. Grant DiskLens Full Disk Access in System Settings → Privacy & Security.`
+        `macOS denied access to ${root}. Grant Bestdisk Full Disk Access in System Settings → Privacy & Security.`
       )
     }
     if (isRecoverable(err)) {

@@ -27,7 +27,7 @@ import { formatBytes, formatItems } from '@renderer/utils/formatBytes'
 import { searchTree } from '@renderer/utils/tree'
 import { IconButton, SegmentedControl } from './Primitives'
 
-export const FILTER_INPUT_ID = 'disklens-filter-input'
+export const FILTER_INPUT_ID = 'Bestdisk-filter-input'
 
 const VIEW_OPTIONS: Array<{ value: ViewMode; label: string; icon: typeof Layers }> = [
   { value: 'sunburst', label: 'Sunburst', icon: Layers },
@@ -155,11 +155,10 @@ export function ToolBar(): JSX.Element {
                   type="button"
                   onClick={() => zoomTo(index)}
                   title={node.path}
-                  className={`mac-ease max-w-[140px] truncate rounded-md px-1.5 py-0.5 text-body transition-colors duration-150 ${
-                    isLast
+                  className={`mac-ease max-w-[140px] truncate rounded-md px-1.5 py-0.5 text-body transition-colors duration-150 ${isLast
                       ? 'font-medium text-[var(--text-primary)]'
                       : 'text-[var(--text-secondary)] hover:bg-[var(--bg-hover)] hover:text-[var(--text-primary)]'
-                  }`}
+                    }`}
                 >
                   {index === 0 ? node.name || node.path : node.name}
                 </button>
@@ -275,49 +274,49 @@ export function ToolBar(): JSX.Element {
           </span>
         ) : null}
 
-      {/* Export menu */}
-      <div ref={exportRef} className="relative">
-        <IconButton
-          icon={Download}
-          label="Export Scan Results"
-          disabled={!root || scanning}
-          onClick={() => setExportOpen((prev) => !prev)}
-        />
-        {exportOpen ? (
-          <div className="absolute right-0 top-full z-50 mt-1.5 w-48 overflow-hidden rounded-xl border border-[var(--border)] bg-[var(--bg-primary)] p-1 shadow-2xl backdrop-blur-2xl">
-            <button
-              type="button"
-              onClick={() => void handleExport('csv')}
-              className="flex w-full items-center gap-2 rounded-lg px-2.5 py-1.5 text-left text-body text-[var(--text-primary)] hover:bg-[var(--bg-hover)] transition-colors duration-150"
-            >
-              <FileSpreadsheet className="h-4 w-4 text-[var(--accent-teal)]" />
-              <div>
-                <p className="font-medium text-[12px]">Export as CSV</p>
-                <p className="text-[10px] text-[var(--text-tertiary)]">Spreadsheet table</p>
-              </div>
-            </button>
-            <button
-              type="button"
-              onClick={() => void handleExport('json')}
-              className="flex w-full items-center gap-2 rounded-lg px-2.5 py-1.5 text-left text-body text-[var(--text-primary)] hover:bg-[var(--bg-hover)] transition-colors duration-150"
-            >
-              <FileText className="h-4 w-4 text-[var(--accent-blue)]" />
-              <div>
-                <p className="font-medium text-[12px]">Export as JSON</p>
-                <p className="text-[10px] text-[var(--text-tertiary)]">Full hierarchy tree</p>
-              </div>
-            </button>
-          </div>
-        ) : null}
-      </div>
+        {/* Export menu */}
+        <div ref={exportRef} className="relative">
+          <IconButton
+            icon={Download}
+            label="Export Scan Results"
+            disabled={!root || scanning}
+            onClick={() => setExportOpen((prev) => !prev)}
+          />
+          {exportOpen ? (
+            <div className="absolute right-0 top-full z-50 mt-1.5 w-48 overflow-hidden rounded-xl border border-[var(--border)] bg-[var(--bg-primary)] p-1 shadow-2xl backdrop-blur-2xl">
+              <button
+                type="button"
+                onClick={() => void handleExport('csv')}
+                className="flex w-full items-center gap-2 rounded-lg px-2.5 py-1.5 text-left text-body text-[var(--text-primary)] hover:bg-[var(--bg-hover)] transition-colors duration-150"
+              >
+                <FileSpreadsheet className="h-4 w-4 text-[var(--accent-teal)]" />
+                <div>
+                  <p className="font-medium text-[12px]">Export as CSV</p>
+                  <p className="text-[10px] text-[var(--text-tertiary)]">Spreadsheet table</p>
+                </div>
+              </button>
+              <button
+                type="button"
+                onClick={() => void handleExport('json')}
+                className="flex w-full items-center gap-2 rounded-lg px-2.5 py-1.5 text-left text-body text-[var(--text-primary)] hover:bg-[var(--bg-hover)] transition-colors duration-150"
+              >
+                <FileText className="h-4 w-4 text-[var(--accent-blue)]" />
+                <div>
+                  <p className="font-medium text-[12px]">Export as JSON</p>
+                  <p className="text-[10px] text-[var(--text-tertiary)]">Full hierarchy tree</p>
+                </div>
+              </button>
+            </div>
+          ) : null}
+        </div>
 
-      <IconButton
-        icon={RefreshCw}
-        label="Rescan (⌘R)"
-        disabled={scanning || pathStack.length === 0}
-        onClick={rescan}
-      />
-      <IconButton icon={ThemeIcon} label={`Theme: ${theme}`} onClick={cycleTheme} />
+        <IconButton
+          icon={RefreshCw}
+          label="Rescan (⌘R)"
+          disabled={scanning || pathStack.length === 0}
+          onClick={rescan}
+        />
+        <IconButton icon={ThemeIcon} label={`Theme: ${theme}`} onClick={cycleTheme} />
       </div>
     </div>
   )

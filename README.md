@@ -1,4 +1,4 @@
-# DiskLens
+# Bestdisk
 
 A macOS disk space analyzer and manager built with Electron, React and D3.
 Scan a volume or folder, explore it as a sunburst or treemap, then move the

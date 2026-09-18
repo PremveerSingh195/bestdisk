@@ -1,12 +1,25 @@
 {
-  "name": "disklens",
+  "name": "bestdisk",
   "version": "1.0.0",
-  "description": "DiskLens — a macOS disk space analyzer and manager",
+  "description": "Bestdisk — a macOS disk space analyzer and manager",
   "main": "./out/main/index.js",
   "license": "MIT",
   "private": true,
   "engines": {
     "node": ">=20.0.0"
+  },
+  "build": {
+    "appId": "com.premveersingh195.bestdisk",
+    "productName": "Bestdisk",
+    "mac": {
+      "category": "public.app-category.utilities",
+      "target": [
+        "dmg"
+      ]
+    },
+    "dmg": {
+      "title": "Bestdisk"
+    }
   },
   "scripts": {
     "dev": "electron-vite dev",

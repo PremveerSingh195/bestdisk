@@ -20,7 +20,7 @@ export function EmptyState({
       <div className="max-w-sm space-y-1.5">
         <h2 className="text-title font-semibold">See where your disk space went</h2>
         <p className="text-body text-[var(--text-secondary)]">
-          Pick a volume from the sidebar, or choose any folder to scan. DiskLens maps every
+          Pick a volume from the sidebar, or choose any folder to scan. Bestdisk maps every
           file into an interactive chart you can drill into.
         </p>
       </div>

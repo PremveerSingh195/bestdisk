@@ -57,7 +57,7 @@ export async function exportScanResults(
   try {
     const dateStr = new Date().toISOString().slice(0, 10)
     const sanitizedName = (root.name || 'scan').replace(/[/\\?%*:|"<>]/g, '-')
-    const defaultName = `DiskLens-${sanitizedName}-${dateStr}.${format}`
+    const defaultName = `Bestdisk-${sanitizedName}-${dateStr}.${format}`
 
     const result = await dialog.showSaveDialog({
       title: `Export Scan Results as ${format.toUpperCase()}`,

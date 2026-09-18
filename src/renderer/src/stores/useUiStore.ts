@@ -5,8 +5,8 @@ export type ThemePreference = 'system' | 'dark' | 'light'
 export type RightTab = 'details' | 'largest' | 'duplicates' | 'old-files'
 export type ActiveNav = 'analyzer' | 'uninstaller' | 'search'
 
-const THEME_KEY = 'disklens.theme'
-const SIDEBAR_KEY = 'disklens.sidebarCollapsed'
+const THEME_KEY = 'Bestdisk.theme'
+const SIDEBAR_KEY = 'Bestdisk.sidebarCollapsed'
 
 function readSidebarCollapsed(): boolean {
   try {

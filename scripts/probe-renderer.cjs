@@ -114,7 +114,7 @@ async function evaluate(win, expression) {
 /** Polls an expression until it is truthy, or gives up. */
 async function waitFor(win, expression, timeoutMs = 6000) {
   const deadline = Date.now() + timeoutMs
-  for (;;) {
+  for (; ;) {
     const value = await evaluate(win, expression)
     if (value) return value
     if (Date.now() > deadline) return null
@@ -164,7 +164,7 @@ app.whenReady().then(async () => {
     })
     setTimeout(() => win.webContents.send('scan:complete', PROBE_TREE), 80)
   })
-  ipcMain.on('scan:cancel', () => {})
+  ipcMain.on('scan:cancel', () => { })
 
   const timeout = setTimeout(() => {
     console.error('  \u2717 probe timed out')
@@ -360,7 +360,7 @@ app.whenReady().then(async () => {
   await evaluate(
     win,
     `(() => {
-      const input = document.getElementById('disklens-filter-input')
+      const input = document.getElementById('Bestdisk-filter-input')
       if (!input) return false
       const setter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set
       setter.call(input, 'Photos')
