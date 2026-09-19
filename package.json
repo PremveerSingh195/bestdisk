@@ -7,7 +7,7 @@
   "private": true,
   "author": {
     "name": "Premveer Singh",
-    "email": "prem.veer2836@gmail.com"
+    "email": "your@email.com"
   },
   "repository": {
     "type": "git",
@@ -15,61 +15,6 @@
   },
   "engines": {
     "node": ">=20.0.0"
-  },
-  "build": {
-    "appId": "com.premveersingh195.bestdisk",
-    "productName": "Bestdisk",
-    "copyright": "Copyright © 2025 Premveer Singh",
-    "afterPack": "scripts/adhoc-sign.cjs",
-    "files": [
-      "out/**/*",
-      "!**/*.map"
-    ],
-    "directories": {
-      "output": "dist",
-      "buildResources": "build"
-    },
-    "mac": {
-      "category": "public.app-category.utilities",
-      "identity": null,
-      "target": [
-        {
-          "target": "dmg",
-          "arch": [
-            "universal"
-          ]
-        }
-      ],
-      "icon": "build/icon.icns"
-    },
-    "dmg": {
-      "artifactName": "Bestdisk-universal.dmg",
-      "title": "Bestdisk ${version}",
-      "iconSize": 80,
-      "contents": [
-        {
-          "x": 130,
-          "y": 220
-        },
-        {
-          "x": 410,
-          "y": 220,
-          "type": "link",
-          "path": "/Applications"
-        }
-      ],
-      "window": {
-        "width": 540,
-        "height": 380
-      }
-    },
-    "publish": [
-      {
-        "provider": "github",
-        "owner": "PremveerSingh195",
-        "repo": "bestdisk"
-      }
-    ]
   },
   "scripts": {
     "dev": "electron-vite dev",

@@ -2,10 +2,9 @@ const { execSync } = require('child_process')
 const path = require('path')
 
 exports.default = async function (context) {
-    // When building a universal app, electron-builder first packs x64 and arm64 into temporary folders (-temp).
-    // Signing those intermediate bundles generates architecture-specific CodeResources files that cause
-    // @electron/universal SHA comparison checks to fail.
-    // Only sign the final output bundle (not the intermediate -temp folders).
+    // electron-builder packs intermediate x64 and arm64 staging bundles to -temp folders.
+    // Signing those creates arch-specific CodeResources files that break @electron/universal merge.
+    // We only sign the final output bundle.
     if (context.appOutDir.includes('-temp')) {
         return
     }
@@ -15,5 +14,5 @@ exports.default = async function (context) {
 
     console.log(`\nAd-hoc signing: ${appPath}`)
     execSync(`codesign --force --deep --sign - "${appPath}"`)
-    console.log('Ad-hoc signing complete ✓\n')
+    console.log('Done ✓\n')
 }

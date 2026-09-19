@@ -1,32 +1,47 @@
-appId: com.yourname.diskanalyzer
+appId: com.premveersingh195.bestdisk
 productName: Bestdisk
-copyright: Copyright © 2024
+copyright: Copyright © 2025 Premveer Singh
+afterPack: scripts/adhoc-sign.cjs
 
 directories:
-  output: release
+  output: dist
   buildResources: build
 
 files:
   - out/**/*
-  - package.json
+  - "!**/*.map"
 
 mac:
   category: public.app-category.utilities
+  identity: null
   target:
     - target: dmg
       arch:
-        - x64
-        - arm64
-  entitlements: build/entitlements.mac.plist
-  entitlementsInherit: build/entitlements.mac.plist
-  hardenedRuntime: true
-  gatekeeperAssess: false
+        - universal
+  icon: build/icon.icns
   extendInfo:
     NSDesktopFolderUsageDescription: Bestdisk needs access to scan folders and analyze disk usage.
     NSDocumentsFolderUsageDescription: Bestdisk needs access to analyze your Documents folder.
     NSDownloadsFolderUsageDescription: Bestdisk needs access to analyze your Downloads folder.
     NSRemovableVolumesUsageDescription: Bestdisk needs access to scan external volumes.
-    LSMinimumSystemVersion: '11.0'
+    LSMinimumSystemVersion: "11.0"
 
 dmg:
-  artifactName: ${productName}-${version}-${arch}.${ext}
+  artifactName: Bestdisk-universal.dmg
+  title: Bestdisk ${version}
+  iconSize: 80
+  contents:
+    - x: 130
+      y: 220
+    - x: 410
+      y: 220
+      type: link
+      path: /Applications
+  window:
+    width: 540
+    height: 380
+
+publish:
+  - provider: github
+    owner: PremveerSingh195
+    repo: bestdisk
