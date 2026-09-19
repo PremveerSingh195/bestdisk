@@ -5,21 +5,71 @@
   "main": "./out/main/index.js",
   "license": "MIT",
   "private": true,
+  "author": {
+    "name": "Premveer Singh",
+    "email": "prem.veer2836@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PremveerSingh195/bestdisk"
+  },
   "engines": {
     "node": ">=20.0.0"
   },
   "build": {
     "appId": "com.premveersingh195.bestdisk",
     "productName": "Bestdisk",
+    "copyright": "Copyright © 2025 Premveer Singh",
+    "afterPack": "scripts/adhoc-sign.cjs",
+    "files": [
+      "out/**/*",
+      "!**/*.map"
+    ],
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
     "mac": {
       "category": "public.app-category.utilities",
+      "identity": null,
       "target": [
-        "dmg"
-      ]
+        {
+          "target": "dmg",
+          "arch": [
+            "universal"
+          ]
+        }
+      ],
+      "icon": "build/icon.icns"
     },
     "dmg": {
-      "title": "Bestdisk"
-    }
+      "artifactName": "Bestdisk-universal.dmg",
+      "title": "Bestdisk ${version}",
+      "iconSize": 80,
+      "contents": [
+        {
+          "x": 130,
+          "y": 220
+        },
+        {
+          "x": 410,
+          "y": 220,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ],
+      "window": {
+        "width": 540,
+        "height": 380
+      }
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "PremveerSingh195",
+        "repo": "bestdisk"
+      }
+    ]
   },
   "scripts": {
     "dev": "electron-vite dev",
@@ -33,18 +83,10 @@
     "build": "npm run typecheck && electron-vite build",
     "build:mac": "npm run build && electron-builder --mac",
     "build:mac:universal": "npm run build && electron-builder --mac --universal",
-    "build:unpack": "npm run build && electron-builder --dir"
+    "build:unpack": "npm run build && electron-builder --dir",
+    "release": "npm run build && electron-builder --publish=onTagOrDraft"
   },
-  "dependencies": {
-    "clsx": "^2.1.1",
-    "d3": "^7.9.0",
-    "lucide-react": "^0.400.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-window": "^1.8.11",
-    "recharts": "^2.15.0",
-    "zustand": "^4.5.7"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/d3": "^7.4.3",
     "@types/node": "^22.10.0",
@@ -53,13 +95,21 @@
     "@types/react-window": "^1.8.8",
     "@vitejs/plugin-react": "^5.0.4",
     "autoprefixer": "^10.4.20",
+    "clsx": "^2.1.1",
+    "d3": "^7.9.0",
     "electron": "^44.4.1",
     "electron-builder": "^26.15.3",
     "electron-vite": "^5.0.0",
     "esbuild": "^0.25.0",
+    "lucide-react": "^0.400.0",
     "postcss": "^8.4.49",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-window": "^1.8.11",
+    "recharts": "^2.15.0",
     "tailwindcss": "^3.4.17",
     "typescript": "^5.7.2",
-    "vite": "^7.0.0"
+    "vite": "^7.0.0",
+    "zustand": "^4.5.7"
   }
 }
